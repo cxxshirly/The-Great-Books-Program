@@ -1,0 +1,137 @@
+import java.util.*;
+import java.io.*;
+public class GreatBooks{
+	
+	public static void main(String[] arg){
+		int choice = 0;
+		ArrayList<LibraryBook> books = new ArrayList<LibraryBook>(50);
+		int numBooks = inputBooks("library.dat", books);
+		sortRecords(books);
+	//	displayRecords(books,numBooks);
+		
+		while(choice != 3)
+		{
+			displayMenu();
+			Scanner input = new Scanner(System.in);
+			choice = input.nextInt();
+			
+			switch(choice){
+				case 1 : 
+					displayRecords(books,numBooks);
+					break;
+				case 2:
+						
+					break;
+				case 3:
+					
+					break;
+				default: 
+					System.out.println("You have make an error. Please try again.");
+					System.out.println();
+					System.out.println("Please Hit Return to Continue...");
+					break;
+					
+			}
+		}// while
+	}//main
+		
+	public static int inputBooks(String inputFile, ArrayList<LibraryBook> books){
+		int numBooks = 0;
+		try{ 
+			Scanner in = new Scanner(new File(inputFile));
+			while(in.hasNext()){
+				Scanner lsc = new Scanner(in.nextLine()).useDelimiter(";");
+				
+				String title = lsc.next();
+				String name = lsc.next();
+				int copyright = lsc.nextInt();
+				double price = lsc.nextDouble();
+				String genre = lsc.next();
+				
+				books.add(new LibraryBook(title,name,copyright,price,genre));
+			//	printRecord(books,numBooks);
+				numBooks++;
+			}//while
+		}//try
+		
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	
+		return numBooks;
+	}//inputBooks
+
+	public static void printRecord(ArrayList<LibraryBook> books, int location){
+			
+		System.out.println("\b");
+		System.out.println("\b");
+		System.out.println("\b");
+		System.out.println("\b");
+		System.out.println("\b");
+		System.out.println("\b");
+		System.out.println("Record #" + (location + 1) + ":\n");
+		System.out.println("Title:          " + books.get(location).getTitle());
+		System.out.println("Author's Name:  " + books.get(location).getAuthor());
+		System.out.println("Copyright:      " + books.get(location).getCopyright());
+		System.out.println("Price:          " + books.get(location).getPrice());
+		System.out.println("Genre:          " + books.get(location).getGenre() + "\n");       
+		System.out.print("\b");
+	}//printRecord
+
+	public static void displayRecords(ArrayList<LibraryBook> books, int numBooks){
+		String enter = "enter";
+		Scanner input = new Scanner(System.in);
+
+		for (int i = 0; i < numBooks; i++){
+			printRecord(books,i);
+			enter = input.next();
+			if(enter.equals("")){
+				continue;	
+			}		
+			else{
+				while(!enter.equals("")){
+					System.out.print("You had made an error!");
+					System.out.println("Please hit return to continue ...");	
+					enter = input.next();
+				}
+			}				
+
+		}
+
+	}
+
+	public static void sortRecords(ArrayList<LibraryBook> books){
+		int minIndex, index, j;
+		LibraryBook temp; 
+		int pass = 0;
+		
+		for(index = 0; index < books.size()-1; index++){
+			minIndex = index;
+			for(j = minIndex+1; j < books.size(); j++)
+				if(books.get(j).getTitle().compareTo(books.get(minIndex).getTitle()) < 0)
+					minIndex = j;
+
+			if (minIndex != index){
+				temp = books.get(index);
+				books.set(index,books.get(minIndex));
+				books.set(minIndex,temp);
+			}
+		}
+	}//sortRecord	
+
+	public static void displayMenu(){
+	
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");	
+		System.out.println("              THE GREAT BOOKS SEARCH PROGRAM                    ");
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println();
+		System.out.println("1) Display all book records                                     ");
+		System.out.println("2) Search for a book by Title                                   ");
+		System.out.println("3) Exit Search Program                                          ");
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println();
+		System.out.println("Please Enter Your Choice > ");
+		
+	}
+
+}//Great Books

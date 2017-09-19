@@ -1,0 +1,21 @@
+The Great Books Program
+Written by: Xinxin Chen
+10/12/2016
+
+1. problem description
+	// when using selection sort in the arraylist, make sure the sorting only happen in the book title and be careful to not only switch the title of the record. In the method, using a for loop to determine the minIndex using the title object in the arraylist,then switch the whole arraylist object base on the index number.
+
+2. program specification
+	// the database file is being input to a java class and it will output the the number of the books inside the file.
+
+3. program algorithm
+	1) write a method called "openFile",using the provided code from the sheet to print out all the datafile in the directory,then use a Scanner to ask user to input the filename, if the user input an error, using a food loop to ask them input the filename again, also, return a string called inputFile
+	2) inputBooks method: after determine the inputfile by typing in the filename, using a scanner class to put all the data in a librarybook type arraylist, and return the numbers of the books that has been inputed
+	3) printRecord method: print out the record individually using the arraylist method
+	4) displayRecords method: allows the program displays the record one by one as the user hit return or they can hit "m" to return to the menu, using for loop and scanner clas
+	5) sortRecords method: use selection sort to sort the record
+	6) binarySearch method: use binary search to search book record by title 
+	7) searchTitle method: print out the result of the searching using sanner and if statement
+	8) displayMenu method: print out the menu bar
+	9) clearScreen method: clear the screen	
+	//in main: set up variables creat arraylist of books,the input the book from the file using openfile method as a parameters,then sort the book record using sortRecords. print out the number of book and clearscreen after hitting return. in a while loop, use switch statement to let user choose what case they want to use.In deafult case, thee user will need to hit return in order to go back to the menu bar. the while loop would not stop until the user hit choice 3 to exit the program.	
